@@ -107,7 +107,7 @@ class LLMExtractor:
             
             data = {
                 'model': 'deepseek-chat',
-                'messages': [messages=[
+                'messages': [
                     {"role": "system", "content": "You are a professional document information extraction assistant. Please strictly return results in JSON format."},
                     {"role": "user", "content": prompt}
                 ],
