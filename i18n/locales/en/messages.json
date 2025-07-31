@@ -24,7 +24,7 @@
       "person_name": "Person Names",
       "numbers": "Numbers (Amount, Percentage, Code)",
       "book_title": "Book Titles (Content in 《》)",
-      "proposal_name": "Proposal/Motion Names"
+      "proposal": "Proposal/Motion Names"
     },
     "select_all": "Select All",
     "clear_all": "Clear All",

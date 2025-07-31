@@ -24,7 +24,7 @@
       "person_name": "人名",
       "numbers": "数字（金额、百分比、代码）",
       "book_title": "书名号内容（《》内文字）",
-      "proposal_name": "提案/议案名称"
+      "proposal": "提案/议案名称"
     },
     "select_all": "全选",
     "clear_all": "清空",

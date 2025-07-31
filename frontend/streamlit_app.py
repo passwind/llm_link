@@ -93,9 +93,9 @@ class PDFQueryApp:
                     
                     selected_types = []
                     for query_type in query_types_data:
-                        # Get translated name
-                        type_name = query_type['name']
-                        display_name = t(f'query.types.{type_name}', fallback=type_name)
+                        # Get translated name using the id field
+                        type_id = query_type['id']
+                        display_name = t(f'query.types.{type_id}')
                         
                         if st.checkbox(
                             display_name,
