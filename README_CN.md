@@ -330,6 +330,21 @@ streamlit run frontend/streamlit_app.py --logger.level=debug
 - 🐛 Issues: [GitHub Issues]
 - 💬 Discussions: [GitHub Discussions]
 
+## 📄 许可证
+
+本项目采用 Apache License 2.0 许可证 - 详情请查看 [LICENSE](LICENSE) 文件。
+
+### 商业使用
+
+本项目采用 Apache-2.0 许可证，允许：
+- ✅ 商业使用
+- ✅ 修改
+- ✅ 分发
+- ✅ 专利使用
+- ✅ 私人使用
+
+您可以将此代码用于商业目的，无需作者的明确许可。
+
 ---
 
 **智能PDF快速联动查询系统** - 让文档信息抽取更智能、更高效！

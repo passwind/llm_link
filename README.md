@@ -359,6 +359,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Documentation**: [Wiki](https://github.com/your-username/ai_link/wiki)
 - **Email**: mike.zhuyu@gmail.com
 
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+### Commercial Use
+
+This project is licensed under Apache-2.0, which allows:
+- ✅ Commercial use
+- ✅ Modification
+- ✅ Distribution
+- ✅ Patent use
+- ✅ Private use
+
+You can use this code for commercial purposes without explicit permission from the author.
+
 ---
 
 **Built with ❤️ for intelligent document processing**
