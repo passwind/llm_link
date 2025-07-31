@@ -357,7 +357,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Project Repository**: [GitHub](https://github.com/your-username/ai_link)
 - **Issue Tracker**: [GitHub Issues](https://github.com/your-username/ai_link/issues)
 - **Documentation**: [Wiki](https://github.com/your-username/ai_link/wiki)
-- **Email**: your-email@example.com
+- **Email**: mike.zhuyu@gmail.com
 
 ---
 

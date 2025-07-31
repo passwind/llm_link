@@ -326,7 +326,7 @@ streamlit run frontend/streamlit_app.py --logger.level=debug
 
 如有问题或建议，请通过以下方式联系：
 
-- 📧 Email: [your-email@example.com]
+- 📧 Email: [mike.zhuyu@gmail.com]
 - 🐛 Issues: [GitHub Issues]
 - 💬 Discussions: [GitHub Discussions]
 
