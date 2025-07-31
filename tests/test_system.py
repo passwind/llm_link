@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-系统功能测试脚本
+System Function Test Script
 
-用于测试PDF处理、LLM抽取等核心功能
+Used to test core functions such as PDF processing and LLM extraction
 """
 
 import sys
@@ -25,61 +25,61 @@ except ImportError as e:
     sys.exit(1)
 
 def test_config():
-    """测试配置"""
-    print("🔧 测试系统配置...")
+    """Test configuration"""
+    print("🔧 Testing system configuration...")
     
     try:
         config = Config()
-        print(f"✅ 上传目录: {config.UPLOAD_FOLDER}")
-        print(f"✅ LLM提供商: {config.LLM_PROVIDER}")
+        print(f"✅ Upload directory: {config.UPLOAD_FOLDER}")
+        print(f"✅ LLM provider: {config.LLM_PROVIDER}")
         
-        # 检查配置验证
+        # Check configuration validation
         errors = config.validate_config()
         if errors:
-            print("⚠️  配置警告:")
+            print("⚠️  Configuration warnings:")
             for error in errors:
                 print(f"   - {error}")
         else:
-            print("✅ 配置验证通过")
+            print("✅ Configuration validation passed")
         
-        # 获取LLM配置信息
+        # Get LLM configuration info
         llm_config = config.get_llm_config()
-        print(f"✅ LLM配置: {llm_config}")
+        print(f"✅ LLM configuration: {llm_config}")
         
         return True
     except Exception as e:
-        print(f"❌ 配置测试失败: {str(e)}")
+        print(f"❌ Configuration test failed: {str(e)}")
         return False
 
 def test_pdf_processor():
-    """测试PDF处理器"""
-    print("\n📄 测试PDF处理器...")
+    """Test PDF processor"""
+    print("\n📄 Testing PDF processor...")
     
     try:
         processor = PDFProcessor()
-        print("✅ PDF处理器初始化成功")
+        print("✅ PDF processor initialized successfully")
         
-        # 测试基本方法
+        # Test basic methods
         page_count = processor.get_page_count()
-        print(f"✅ 页数获取方法: {page_count}")
+        print(f"✅ Page count method: {page_count}")
         
         return True
     except Exception as e:
-        print(f"❌ PDF处理器测试失败: {str(e)}")
+        print(f"❌ PDF processor test failed: {str(e)}")
         return False
 
 def test_llm_extractor():
-    """测试LLM抽取器"""
-    print("\n🤖 测试LLM抽取器...")
+    """Test LLM extractor"""
+    print("\n🤖 Testing LLM extractor...")
     
     try:
         extractor = LLMExtractor()
-        print("✅ LLM抽取器初始化成功")
+        print("✅ LLM extractor initialized successfully")
         
-        # 测试规则抽取（不依赖API）
+        # Test rule extraction (not dependent on API)
         test_text = "本报告由《中国建设银行》提供，股票代码601939，涨幅15.5%。"
         
-        # 模拟页面数据
+        # Simulate page data
         page_data = {
             'page_number': 1,
             'text_blocks': [
@@ -90,114 +90,114 @@ def test_llm_extractor():
             ]
         }
         
-        # 测试书名号抽取
+        # Test book title extraction
         results = extractor._extract_with_rules(test_text, 'book_title', 1, page_data)
-        print(f"✅ 书名号抽取测试: 找到 {len(results)} 个结果")
+        print(f"✅ Book title extraction test: found {len(results)} results")
         
-        # 测试数字抽取
+        # Test number extraction
         results = extractor._extract_with_rules(test_text, 'numbers', 1, page_data)
-        print(f"✅ 数字抽取测试: 找到 {len(results)} 个结果")
+        print(f"✅ Number extraction test: found {len(results)} results")
         
         return True
     except Exception as e:
-        print(f"❌ LLM抽取器测试失败: {str(e)}")
+        print(f"❌ LLM extractor test failed: {str(e)}")
         return False
 
 def test_local_llm():
-    """测试本地LLM（如果可用）"""
-    print("\n🏠 测试本地LLM...")
+    """Test local LLM (if available)"""
+    print("\n🏠 Testing local LLM...")
     
     try:
         from backend.local_llm import LocalLLMManager
         
         manager = LocalLLMManager()
-        print("✅ 本地LLM管理器初始化成功")
+        print("✅ Local LLM manager initialized successfully")
         
-        # 获取模型信息
+        # Get model information
         model_info = manager.get_model_info()
-        print(f"✅ 模型信息: {json.dumps(model_info, indent=2, ensure_ascii=False)}")
+        print(f"✅ Model information: {json.dumps(model_info, indent=2, ensure_ascii=False)}")
         
-        # 检查是否有可用的本地模型
+        # Check if local models are available
         model_path = model_info['model_path']
         if os.path.exists(model_path):
-            print(f"✅ 模型目录存在: {model_path}")
+            print(f"✅ Model directory exists: {model_path}")
             
-            # 列出可用模型
+            # List available models
             models = [d for d in os.listdir(model_path) if os.path.isdir(os.path.join(model_path, d))]
             if models:
-                print(f"✅ 可用模型: {models}")
+                print(f"✅ Available models: {models}")
             else:
-                print("⚠️  模型目录为空，请下载模型")
+                print("⚠️  Model directory is empty, please download models")
         else:
-            print(f"⚠️  模型目录不存在: {model_path}")
+            print(f"⚠️  Model directory does not exist: {model_path}")
         
         return True
     except Exception as e:
-        print(f"❌ 本地LLM测试失败: {str(e)}")
+        print(f"❌ Local LLM test failed: {str(e)}")
         return False
 
 def create_sample_pdf():
-    """创建示例PDF文件用于测试"""
-    print("\n📝 创建示例PDF...")
+    """Create sample PDF file for testing"""
+    print("\n📝 Creating sample PDF...")
     
     try:
         import fitz  # PyMuPDF
         
-        # 创建示例PDF
+        # Create sample PDF
         doc = fitz.open()
         page = doc.new_page()
         
-        # 添加示例文本
+        # Add sample text
         sample_text = """
-智能PDF快速联动查询系统测试文档
+Intelligent PDF Quick Link Query System Test Document
 
-公司信息：
-- 公司全称：中国建设银行股份有限公司
-- 证券简称：建行
-- 股票代码：601939
-- 涨幅：15.5%
+Company Information:
+- Full Company Name: China Construction Bank Corporation
+- Stock Abbreviation: CCB
+- Stock Code: 601939
+- Increase: 15.5%
 
-相关文件：
-- 《公司章程》
-- 《年度报告》
+Related Documents:
+- 《Company Articles》
+- 《Annual Report》
 
-负责人：张三、李四
+Responsible Persons: Zhang San, Li Si
 
-提案名称：关于修改公司章程的议案
+Proposal Name: Proposal on Amending Company Articles
         """
         
-        # 插入文本
+        # Insert text
         page.insert_text((50, 50), sample_text, fontsize=12)
         
-        # 保存文件
+        # Save file
         sample_pdf_path = os.path.join(project_root, 'uploads', 'sample_test.pdf')
         doc.save(sample_pdf_path)
         doc.close()
         
-        print(f"✅ 示例PDF创建成功: {sample_pdf_path}")
+        print(f"✅ Sample PDF created successfully: {sample_pdf_path}")
         return sample_pdf_path
         
     except Exception as e:
-        print(f"❌ 创建示例PDF失败: {str(e)}")
+        print(f"❌ Failed to create sample PDF: {str(e)}")
         return None
 
 def test_full_workflow():
-    """测试完整工作流程"""
-    print("\n🔄 测试完整工作流程...")
+    """Test complete workflow"""
+    print("\n🔄 Testing complete workflow...")
     
-    # 创建示例PDF
+    # Create sample PDF
     sample_pdf = create_sample_pdf()
     if not sample_pdf:
-        print("❌ 无法创建示例PDF，跳过完整流程测试")
+        print("❌ Unable to create sample PDF, skipping complete workflow test")
         return False
     
     try:
-        # 1. PDF解析
+        # 1. PDF parsing
         processor = PDFProcessor()
         pages_data = processor.extract_text_with_positions(sample_pdf)
-        print(f"✅ PDF解析成功，共 {len(pages_data)} 页")
+        print(f"✅ PDF parsing successful, total {len(pages_data)} pages")
         
-        # 2. 信息抽取
+        # 2. Information extraction
         extractor = LLMExtractor()
         query_types = ['stock_name', 'company_name', 'book_title', 'numbers']
         
@@ -211,52 +211,52 @@ def test_full_workflow():
             )
             extracted_info.extend(results)
         
-        print(f"✅ 信息抽取成功，共找到 {len(extracted_info)} 条信息")
+        print(f"✅ Information extraction successful, found {len(extracted_info)} items")
         
-        # 显示抽取结果
+        # Display extraction results
         for item in extracted_info:
             print(f"   - {item['type']}: {item['value']}")
         
         return True
         
     except Exception as e:
-        print(f"❌ 完整流程测试失败: {str(e)}")
+        print(f"❌ Complete workflow test failed: {str(e)}")
         return False
 
 def main():
-    """主测试函数"""
-    print("🧪 智能PDF快速联动查询系统 - 功能测试")
+    """Main test function"""
+    print("🧪 Intelligent PDF Quick Link Query System - Function Test")
     print("=" * 50)
     
     test_results = []
     
-    # 运行各项测试
-    test_results.append(("配置测试", test_config()))
-    test_results.append(("PDF处理器测试", test_pdf_processor()))
-    test_results.append(("LLM抽取器测试", test_llm_extractor()))
-    test_results.append(("本地LLM测试", test_local_llm()))
-    test_results.append(("完整流程测试", test_full_workflow()))
+    # Run various tests
+    test_results.append(("Configuration Test", test_config()))
+    test_results.append(("PDF Processor Test", test_pdf_processor()))
+    test_results.append(("LLM Extractor Test", test_llm_extractor()))
+    test_results.append(("Local LLM Test", test_local_llm()))
+    test_results.append(("Complete Workflow Test", test_full_workflow()))
     
-    # 显示测试结果
+    # Display test results
     print("\n" + "=" * 50)
-    print("📊 测试结果汇总:")
+    print("📊 Test Results Summary:")
     
     passed = 0
     total = len(test_results)
     
     for test_name, result in test_results:
-        status = "✅ 通过" if result else "❌ 失败"
+        status = "✅ Passed" if result else "❌ Failed"
         print(f"   {test_name}: {status}")
         if result:
             passed += 1
     
-    print(f"\n总计: {passed}/{total} 项测试通过")
+    print(f"\nTotal: {passed}/{total} tests passed")
     
     if passed == total:
-        print("🎉 所有测试通过！系统功能正常")
+        print("🎉 All tests passed! System functions normally")
         return True
     else:
-        print("⚠️  部分测试失败，请检查相关配置")
+        print("⚠️  Some tests failed, please check related configurations")
         return False
 
 if __name__ == '__main__':

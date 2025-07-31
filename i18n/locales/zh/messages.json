@@ -1,0 +1,100 @@
+{
+  "app": {
+    "title": "智能PDF快速联动查询系统",
+    "subtitle": "基于AI的PDF文档分析和信息抽取",
+    "description": "上传PDF文档，使用先进的LLM技术提取结构化信息"
+  },
+  "upload": {
+    "title": "上传PDF文档",
+    "drag_drop": "拖拽PDF文件到此处，或点击浏览",
+    "supported_formats": "支持格式：PDF",
+    "max_size": "最大文件大小：50MB",
+    "uploading": "上传中...",
+    "success": "文件上传成功！",
+    "error": "上传失败，请重试。",
+    "invalid_format": "文件格式无效，请上传PDF文件。",
+    "file_too_large": "文件大小超出限制。"
+  },
+  "query": {
+    "title": "选择查询类型",
+    "description": "选择您想要从文档中提取的信息类型",
+    "types": {
+      "stock_name": "证券简称",
+      "company_name": "公司全称",
+      "person_name": "人名",
+      "numbers": "数字（金额、百分比、代码）",
+      "book_title": "书名号内容（《》内文字）",
+      "proposal_name": "提案/议案名称"
+    },
+    "select_all": "全选",
+    "clear_all": "清空",
+    "extract_button": "提取信息",
+    "extracting": "正在提取信息...",
+    "no_selection": "请至少选择一种查询类型。"
+  },
+  "results": {
+    "title": "提取结果",
+    "total_found": "共找到条目",
+    "by_type": "按类型分组",
+    "page": "页码",
+    "context": "上下文",
+    "value": "值",
+    "type": "类型",
+    "location": "位置",
+    "no_results": "未找到符合所选条件的信息。",
+    "export": "导出结果",
+    "view_details": "查看详情"
+  },
+  "sidebar": {
+    "file_info": "文件信息",
+    "filename": "文件名",
+    "pages": "页数",
+    "size": "大小",
+    "upload_time": "上传时间",
+    "processing_status": "处理状态",
+    "ready": "就绪",
+    "processing": "处理中",
+    "error": "错误",
+    "settings": "设置",
+    "language": "语言",
+    "llm_provider": "LLM提供商",
+    "model": "模型"
+  },
+  "status": {
+    "connecting": "连接后端中...",
+    "connected": "已连接",
+    "disconnected": "连接断开",
+    "error": "连接错误",
+    "loading": "加载中...",
+    "processing": "处理中...",
+    "completed": "已完成",
+    "failed": "失败"
+  },
+  "errors": {
+    "network_error": "网络连接错误，请检查您的连接。",
+    "server_error": "服务器错误，请稍后重试。",
+    "file_error": "文件处理错误，请检查文件格式。",
+    "extraction_error": "信息提取失败，请重试。",
+    "unknown_error": "发生未知错误，请重试。"
+  },
+  "buttons": {
+    "upload": "上传",
+    "extract": "提取",
+    "download": "下载",
+    "retry": "重试",
+    "cancel": "取消",
+    "close": "关闭",
+    "save": "保存",
+    "reset": "重置",
+    "back": "返回",
+    "next": "下一步"
+  },
+  "navigation": {
+    "home": "首页",
+    "upload": "上传",
+    "results": "结果",
+    "settings": "设置",
+    "help": "帮助",
+    "about": "关于"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "app": {
+    "title": "Intelligent PDF Quick Link Query System",
+    "subtitle": "AI-powered PDF document analysis and information extraction",
+    "description": "Upload PDF documents and extract structured information using advanced LLM technology"
+  },
+  "upload": {
+    "title": "Upload PDF Document",
+    "drag_drop": "Drag and drop your PDF file here, or click to browse",
+    "supported_formats": "Supported formats: PDF",
+    "max_size": "Maximum file size: 50MB",
+    "uploading": "Uploading...",
+    "success": "File uploaded successfully!",
+    "error": "Upload failed. Please try again.",
+    "invalid_format": "Invalid file format. Please upload a PDF file.",
+    "file_too_large": "File size exceeds the limit."
+  },
+  "query": {
+    "title": "Select Query Types",
+    "description": "Choose the types of information you want to extract from the document",
+    "types": {
+      "stock_name": "Stock/Security Names",
+      "company_name": "Company Names",
+      "person_name": "Person Names",
+      "numbers": "Numbers (Amount, Percentage, Code)",
+      "book_title": "Book Titles (Content in 《》)",
+      "proposal_name": "Proposal/Motion Names"
+    },
+    "select_all": "Select All",
+    "clear_all": "Clear All",
+    "extract_button": "Extract Information",
+    "extracting": "Extracting information...",
+    "no_selection": "Please select at least one query type."
+  },
+  "results": {
+    "title": "Extraction Results",
+    "total_found": "Total items found",
+    "by_type": "Results by Type",
+    "page": "Page",
+    "context": "Context",
+    "value": "Value",
+    "type": "Type",
+    "location": "Location",
+    "no_results": "No information found matching the selected criteria.",
+    "export": "Export Results",
+    "view_details": "View Details"
+  },
+  "sidebar": {
+    "file_info": "File Information",
+    "filename": "Filename",
+    "pages": "Pages",
+    "size": "Size",
+    "upload_time": "Upload Time",
+    "processing_status": "Processing Status",
+    "ready": "Ready",
+    "processing": "Processing",
+    "error": "Error",
+    "settings": "Settings",
+    "language": "Language",
+    "llm_provider": "LLM Provider",
+    "model": "Model"
+  },
+  "status": {
+    "connecting": "Connecting to backend...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Connection error",
+    "loading": "Loading...",
+    "processing": "Processing...",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "errors": {
+    "network_error": "Network connection error. Please check your connection.",
+    "server_error": "Server error. Please try again later.",
+    "file_error": "File processing error. Please check the file format.",
+    "extraction_error": "Information extraction failed. Please try again.",
+    "unknown_error": "An unknown error occurred. Please try again."
+  },
+  "buttons": {
+    "upload": "Upload",
+    "extract": "Extract",
+    "download": "Download",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "close": "Close",
+    "save": "Save",
+    "reset": "Reset",
+    "back": "Back",
+    "next": "Next"
+  },
+  "navigation": {
+    "home": "Home",
+    "upload": "Upload",
+    "results": "Results",
+    "settings": "Settings",
+    "help": "Help",
+    "about": "About"
+  }
+}

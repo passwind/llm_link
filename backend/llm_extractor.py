@@ -13,14 +13,14 @@ sys.path.insert(0, str(project_root))
 from config.settings import Config
 
 class LLMExtractor:
-    """LLM信息抽取器"""
+    """LLM Information Extractor"""
     
     def __init__(self):
         self.config = Config()
         self.setup_llm_clients()
     
     def setup_llm_clients(self):
-        """设置LLM客户端"""
+        """Setup LLM clients"""
         # OpenAI客户端
         if self.config.OPENAI_API_KEY:
             openai.api_key = self.config.OPENAI_API_KEY
@@ -28,14 +28,14 @@ class LLMExtractor:
                 openai.api_base = self.config.OPENAI_BASE_URL
     
     def extract_information(self, pages_data: List[Dict], query_types: List[str]) -> List[Dict]:
-        """从PDF页面数据中抽取指定类型的信息
+        """Extract specified types of information from PDF page data
         
         Args:
-            pages_data: PDF页面数据
-            query_types: 查询类型列表
+            pages_data: PDF page data
+            query_types: List of query types
             
         Returns:
-            抽取的信息列表
+            List of extracted information
         """
         all_extracted = []
         
@@ -46,7 +46,7 @@ class LLMExtractor:
             if not page_text.strip():
                 continue
             
-            # 为每种查询类型抽取信息
+            # Extract information for each query type
             for query_type in query_types:
                 extracted_items = self._extract_by_type(page_text, query_type, page_number, page_data)
                 all_extracted.extend(extracted_items)
@@ -54,34 +54,34 @@ class LLMExtractor:
         return all_extracted
     
     def _extract_by_type(self, text: str, query_type: str, page_number: int, page_data: Dict) -> List[Dict]:
-        """根据类型抽取信息
+        """Extract information by type
         
         Args:
-            text: 页面文本
-            query_type: 查询类型
-            page_number: 页码
-            page_data: 页面数据
+            text: Page text
+            query_type: Query type
+            page_number: Page number
+            page_data: Page data
             
         Returns:
-            抽取的信息项列表
+            List of extracted information items
         """
         if self.config.LLM_PROVIDER == 'openai':
             return self._extract_with_openai(text, query_type, page_number, page_data)
         elif self.config.LLM_PROVIDER == 'deepseek':
             return self._extract_with_deepseek(text, query_type, page_number, page_data)
         else:
-            # 使用规则方法作为后备
+            # Use rule-based method as fallback
             return self._extract_with_rules(text, query_type, page_number, page_data)
     
     def _extract_with_openai(self, text: str, query_type: str, page_number: int, page_data: Dict) -> List[Dict]:
-        """使用OpenAI API抽取信息"""
+        """Extract information using OpenAI API"""
         try:
             prompt = self._build_extraction_prompt(text, query_type)
             
             response = openai.ChatCompletion.create(
                 model=self.config.OPENAI_MODEL,
                 messages=[
-                    {"role": "system", "content": "你是一个专业的文档信息抽取助手，请严格按照JSON格式返回结果。"},
+                    {"role": "system", "content": "You are a professional document information extraction assistant. Please strictly return results in JSON format."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.1,
@@ -92,11 +92,11 @@ class LLMExtractor:
             return self._parse_llm_response(result_text, query_type, page_number, page_data)
             
         except Exception as e:
-            print(f"OpenAI API调用失败: {str(e)}")
+            print(f"OpenAI API call failed: {str(e)}")
             return self._extract_with_rules(text, query_type, page_number, page_data)
     
     def _extract_with_deepseek(self, text: str, query_type: str, page_number: int, page_data: Dict) -> List[Dict]:
-        """使用DeepSeek API抽取信息"""
+        """Extract information using DeepSeek API"""
         try:
             prompt = self._build_extraction_prompt(text, query_type)
             
@@ -107,8 +107,8 @@ class LLMExtractor:
             
             data = {
                 'model': 'deepseek-chat',
-                'messages': [
-                    {"role": "system", "content": "你是一个专业的文档信息抽取助手，请严格按照JSON格式返回结果。"},
+                'messages': [messages=[
+                    {"role": "system", "content": "You are a professional document information extraction assistant. Please strictly return results in JSON format."},
                     {"role": "user", "content": prompt}
                 ],
                 'temperature': 0.1,
@@ -127,56 +127,56 @@ class LLMExtractor:
                 result_text = result['choices'][0]['message']['content'].strip()
                 return self._parse_llm_response(result_text, query_type, page_number, page_data)
             else:
-                raise Exception(f"API请求失败: {response.status_code}")
+                raise Exception(f"API request failed: {response.status_code}")
                 
         except Exception as e:
-            print(f"DeepSeek API调用失败: {str(e)}")
+            print(f"DeepSeek API call failed: {str(e)}")
             return self._extract_with_rules(text, query_type, page_number, page_data)
     
     def _build_extraction_prompt(self, text: str, query_type: str) -> str:
-        """构建信息抽取提示词"""
+        """Build information extraction prompt"""
         type_descriptions = {
-            'stock_name': '证券简称（如：建行、平安、茅台等股票简称）',
-            'company_name': '公司全称（如：中国建设银行股份有限公司）',
-            'person_name': '人名（如：张三、李四等人员姓名）',
-            'numbers': '数字信息（如：金额、百分比、代码等）',
-            'book_title': '书名号《》内的文字内容',
-            'proposal': '提案或议案名称'
+            'stock_name': 'Security abbreviations (e.g., CCB, Ping An, Moutai and other stock abbreviations)',
+            'company_name': 'Full company names (e.g., China Construction Bank Corporation)',
+            'person_name': 'Person names (e.g., Zhang San, Li Si and other personnel names)',
+            'numbers': 'Numerical information (e.g., amounts, percentages, codes, etc.)',
+            'book_title': 'Text content within book title marks 《》',
+            'proposal': 'Proposal or motion names'
         }
         
         description = type_descriptions.get(query_type, query_type)
         
-        prompt = f"""请从以下文本中抽取所有的{description}，并返回JSON格式的结果。
+        prompt = f"""Please extract all {description} from the following text and return results in JSON format.
 
-要求：
-1. 返回格式必须是JSON数组
-2. 每个项目包含：value（抽取的值）、context（上下文，包含该值的完整句子）
-3. 如果没有找到相关信息，返回空数组[]
-4. 确保抽取的信息准确，避免误判
+Requirements:
+1. Return format must be a JSON array
+2. Each item contains: value (extracted value), context (context containing the complete sentence with the value)
+3. If no relevant information is found, return empty array []
+4. Ensure extracted information is accurate and avoid misjudgment
 
-文本内容：
+Text content:
 {text}
 
-请返回JSON格式的结果："""
+Please return results in JSON format:"""
         
         return prompt
     
     def _parse_llm_response(self, response_text: str, query_type: str, page_number: int, page_data: Dict) -> List[Dict]:
-        """解析LLM响应结果"""
+        """Parse LLM response results"""
         try:
-            # 尝试提取JSON部分
+            # Try to extract JSON part
             json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
             if json_match:
                 json_str = json_match.group(0)
                 extracted_data = json.loads(json_str)
             else:
-                # 如果没有找到JSON，尝试直接解析
+                # If no JSON found, try direct parsing
                 extracted_data = json.loads(response_text)
             
             results = []
             for item in extracted_data:
                 if isinstance(item, dict) and 'value' in item:
-                    # 查找文本在页面中的位置
+                    # Find text position in page
                     position = self._find_text_position(item['value'], page_data)
                     
                     result = {
@@ -191,15 +191,15 @@ class LLMExtractor:
             return results
             
         except Exception as e:
-            print(f"解析LLM响应失败: {str(e)}")
+            print(f"Failed to parse LLM response: {str(e)}")
             return []
     
     def _extract_with_rules(self, text: str, query_type: str, page_number: int, page_data: Dict) -> List[Dict]:
-        """使用规则方法抽取信息（后备方案）"""
+        """Extract information using rule-based method (fallback solution)"""
         results = []
         
         if query_type == 'book_title':
-            # 抽取书名号内容
+            # Extract book title content
             pattern = r'《([^》]+)》'
             matches = re.finditer(pattern, text)
             for match in matches:
@@ -208,7 +208,7 @@ class LLMExtractor:
                 position = self._find_text_position(value, page_data)
                 
                 results.append({
-                    'type': '书名号内容',
+                    'type': 'Book Title Content',
                     'value': value,
                     'context': context,
                     'page': page_number,
@@ -216,11 +216,11 @@ class LLMExtractor:
                 })
         
         elif query_type == 'numbers':
-            # 抽取数字信息
+            # Extract numerical information
             patterns = [
-                r'\d+\.\d+%',  # 百分比
-                r'\d+(?:,\d{3})*(?:\.\d+)?(?:万|亿|元)',  # 金额
-                r'\d{6}',  # 代码
+                r'\d+\.\d+%',  # Percentages
+                r'\d+(?:,\d{3})*(?:\.\d+)?(?:万|亿|元)',  # Amounts
+                r'\d{6}',  # Codes
             ]
             
             for pattern in patterns:
@@ -231,7 +231,7 @@ class LLMExtractor:
                     position = self._find_text_position(value, page_data)
                     
                     results.append({
-                        'type': '数字',
+                        'type': 'Number',
                         'value': value,
                         'context': context,
                         'page': page_number,
@@ -241,28 +241,28 @@ class LLMExtractor:
         return results
     
     def _find_text_position(self, search_text: str, page_data: Dict) -> List[float]:
-        """在页面数据中查找文本位置"""
+        """Find text position in page data"""
         for text_block in page_data['text_blocks']:
             if search_text in text_block['text']:
                 bbox = text_block['bbox']
                 return [(bbox['x0'] + bbox['x1']) / 2, (bbox['y0'] + bbox['y1']) / 2]
         
-        return [0, 0]  # 默认位置
+        return [0, 0]  # Default position
     
     def _get_context(self, text: str, start: int, end: int, context_length: int = 50) -> str:
-        """获取匹配文本的上下文"""
+        """Get context of matched text"""
         context_start = max(0, start - context_length)
         context_end = min(len(text), end + context_length)
         return text[context_start:context_end].strip()
     
     def _get_type_name(self, query_type: str) -> str:
-        """获取查询类型的中文名称"""
+        """Get Chinese name of query type"""
         type_names = {
-            'stock_name': '证券简称',
-            'company_name': '公司全称',
-            'person_name': '人名',
-            'numbers': '数字',
-            'book_title': '书名号内容',
-            'proposal': '提案/议案名'
+            'stock_name': 'Security Abbreviation',
+            'company_name': 'Company Full Name',
+            'person_name': 'Person Name',
+            'numbers': 'Number',
+            'book_title': 'Book Title Content',
+            'proposal': 'Proposal/Motion Name'
         }
         return type_names.get(query_type, query_type)

@@ -3,20 +3,21 @@ import json
 from typing import List, Dict, Tuple
 
 class PDFProcessor:
-    """PDF文档处理器"""
+    """PDF Document Processor"""
     
     def __init__(self):
+        """Initialize PDF processor"""
         self.current_doc = None
         self.pages_data = []
     
     def extract_text_with_positions(self, pdf_path: str) -> List[Dict]:
-        """从PDF中提取文本和位置信息
+        """Extract text and position information from PDF
         
         Args:
-            pdf_path: PDF文件路径
+            pdf_path: PDF file path
             
         Returns:
-            包含每页文本和位置信息的列表
+            List containing text and position information for each page
         """
         try:
             doc = fitz.open(pdf_path)
@@ -74,16 +75,16 @@ class PDFProcessor:
             return pages_data
             
         except Exception as e:
-            raise Exception(f"PDF解析失败: {str(e)}")
+            raise Exception(f"PDF parsing failed: {str(e)}")
     
     def get_text_by_page(self, page_number: int) -> str:
-        """获取指定页面的文本
+        """Get text from specified page
         
         Args:
-            page_number: 页码（从1开始）
+            page_number: Page number (starting from 1)
             
         Returns:
-            页面文本内容
+            Page text content
         """
         if not self.pages_data or page_number < 1 or page_number > len(self.pages_data):
             return ""
@@ -91,13 +92,13 @@ class PDFProcessor:
         return self.pages_data[page_number - 1]['full_text']
     
     def search_text_positions(self, search_text: str) -> List[Dict]:
-        """搜索文本在PDF中的位置
+        """Search text positions in PDF
         
         Args:
-            search_text: 要搜索的文本
+            search_text: Text to search for
             
         Returns:
-            包含匹配位置信息的列表
+            List containing matching position information
         """
         results = []
         
@@ -120,15 +121,15 @@ class PDFProcessor:
         return results
     
     def get_context_around_position(self, page_number: int, target_bbox: Dict, context_range: int = 100) -> str:
-        """获取指定位置周围的上下文文本
+        """Get context text around specified position
         
         Args:
-            page_number: 页码
-            target_bbox: 目标位置的边界框
-            context_range: 上下文范围（像素）
+            page_number: Page number
+            target_bbox: Target position bounding box
+            context_range: Context range (pixels)
             
         Returns:
-            上下文文本
+            Context text
         """
         if page_number < 1 or page_number > len(self.pages_data):
             return ""
@@ -141,21 +142,21 @@ class PDFProcessor:
         for text_block in page_data['text_blocks']:
             block_y = (text_block['bbox']['y0'] + text_block['bbox']['y1']) / 2
             
-            # 检查是否在上下文范围内
+            # Check if within context range
             if abs(block_y - target_y) <= context_range:
                 context_texts.append(text_block['text'])
         
         return ' '.join(context_texts)
     
     def get_page_count(self) -> int:
-        """获取PDF页数"""
+        """Get PDF page count"""
         return len(self.pages_data)
     
     def export_text_data(self, output_path: str):
-        """导出文本数据到JSON文件
+        """Export text data to JSON file
         
         Args:
-            output_path: 输出文件路径
+            output_path: Output file path
         """
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(self.pages_data, f, ensure_ascii=False, indent=2)
