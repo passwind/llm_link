@@ -86,7 +86,6 @@
     "ready": "就绪",
     "processing": "处理中",
     "error": "错误",
-    "settings": "设置",
     "language": "语言",
     "llm_provider": "LLM提供商",
     "model": "模型"

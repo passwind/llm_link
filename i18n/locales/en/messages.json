@@ -86,7 +86,6 @@
     "ready": "Ready",
     "processing": "Processing",
     "error": "Error",
-    "settings": "Settings",
     "language": "Language",
     "llm_provider": "LLM Provider",
     "model": "Model"
