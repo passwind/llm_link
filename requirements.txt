@@ -1,0 +1,31 @@
+# PDF处理
+PyMuPDF==1.23.14
+pdfplumber==0.10.3
+
+# Web框架
+Flask==3.0.0
+Flask-CORS==4.0.0
+streamlit==1.29.0
+
+# LLM接口
+openai==1.6.1
+anthropic==0.8.1
+requests==2.31.0
+
+# 数据处理
+numpy==1.24.3
+pandas==2.0.3
+
+# 向量索引（可选）
+faiss-cpu==1.7.4
+llama-index==0.9.30
+
+# 本地LLM支持
+transformers==4.36.2
+torch==2.1.2
+
+# 其他工具
+python-dotenv==1.0.0
+Pillow==10.1.0
+json5==0.9.14
+pydantic==2.5.2
