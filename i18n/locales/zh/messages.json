@@ -13,7 +13,12 @@
     "success": "文件上传成功！",
     "error": "上传失败，请重试。",
     "invalid_format": "文件格式无效，请上传PDF文件。",
-    "file_too_large": "文件大小超出限制。"
+    "file_too_large": "文件大小超出限制。",
+    "upload_first": "请先上传PDF文件，然后进行信息抽取。",
+    "filename": "文件名",
+    "file_size": "文件大小",
+    "file_type": "文件类型",
+    "upload_and_parse": "上传并解析"
   },
   "query": {
     "title": "选择查询类型",
@@ -32,6 +37,16 @@
     "extracting": "正在提取信息...",
     "no_selection": "请至少选择一种查询类型。"
   },
+  "extraction": {
+    "title": "信息抽取",
+    "document_name": "文档名称",
+    "pages": "页数",
+    "start_button": "开始抽取",
+    "processing": "正在处理文档...",
+    "success": "信息抽取成功！",
+    "error": "抽取失败，请重试。",
+    "select_types": "请在抽取前至少选择一种查询类型。"
+  },
   "results": {
     "title": "提取结果",
     "total_found": "共找到条目",
@@ -41,11 +56,27 @@
     "value": "值",
     "type": "类型",
     "location": "位置",
-    "no_results": "未找到符合所选条件的信息。",
+    "no_results": "未找到符合条件的信息。",
     "export": "导出结果",
-    "view_details": "查看详情"
+    "view_details": "查看详情",
+    "found_items": "找到 {count} 个条目",
+    "list": "结果列表",
+    "details": "条目详情",
+    "select_item": "从列表中选择一个条目查看详情",
+    "extracted_value": "提取值",
+    "page_number": "第 {page} 页",
+    "position": "位置",
+    "full_context": "完整上下文",
+    "view_pdf": "查看PDF"
   },
   "sidebar": {
+    "settings": "设置",
+    "system_info": "系统信息",
+    "features": "功能特性",
+    "feature_upload": "PDF文件上传和解析",
+    "feature_extract": "智能信息抽取",
+    "feature_locate": "精确文本定位",
+    "feature_display": "交互式结果展示",
     "file_info": "文件信息",
     "filename": "文件名",
     "pages": "页数",

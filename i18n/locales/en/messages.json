@@ -13,7 +13,12 @@
     "success": "File uploaded successfully!",
     "error": "Upload failed. Please try again.",
     "invalid_format": "Invalid file format. Please upload a PDF file.",
-    "file_too_large": "File size exceeds the limit."
+    "file_too_large": "File size exceeds the limit.",
+    "upload_first": "Please upload a PDF file first to proceed with information extraction.",
+    "filename": "Filename",
+    "file_size": "File Size",
+    "file_type": "File Type",
+    "upload_and_parse": "Upload and Parse"
   },
   "query": {
     "title": "Select Query Types",
@@ -32,6 +37,16 @@
     "extracting": "Extracting information...",
     "no_selection": "Please select at least one query type."
   },
+  "extraction": {
+    "title": "Information Extraction",
+    "document_name": "Document Name",
+    "pages": "Pages",
+    "start_button": "Start Extraction",
+    "processing": "Processing document...",
+    "success": "Information extracted successfully!",
+    "error": "Extraction failed. Please try again.",
+    "select_types": "Please select at least one query type before extraction."
+  },
   "results": {
     "title": "Extraction Results",
     "total_found": "Total items found",
@@ -43,9 +58,25 @@
     "location": "Location",
     "no_results": "No information found matching the selected criteria.",
     "export": "Export Results",
-    "view_details": "View Details"
+    "view_details": "View Details",
+    "found_items": "Found {count} items",
+    "list": "Results List",
+    "details": "Item Details",
+    "select_item": "Select an item from the list to view details",
+    "extracted_value": "Extracted Value",
+    "page_number": "Page {page}",
+    "position": "Position",
+    "full_context": "Full Context",
+    "view_pdf": "View PDF"
   },
   "sidebar": {
+    "settings": "Settings",
+    "system_info": "System Information",
+    "features": "Features",
+    "feature_upload": "PDF file upload and parsing",
+    "feature_extract": "Intelligent information extraction",
+    "feature_locate": "Precise text positioning",
+    "feature_display": "Interactive result display",
     "file_info": "File Information",
     "filename": "Filename",
     "pages": "Pages",
